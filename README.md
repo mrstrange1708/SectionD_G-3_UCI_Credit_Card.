@@ -79,21 +79,21 @@ Financial institutions face increasing loan defaults, leading to revenue loss an
 
 | Attribute | Details |
 |---|---|
-| **Source Name** | _e.g. World Bank, data.gov.in, Kaggle (raw only)_ |
-| **Direct Access Link** | _Paste the direct download or access URL_ |
-| **Row Count** | _Must be greater than 5,000_ |
-| **Column Count** | _Must be greater than 8 meaningful columns_ |
-| **Time Period Covered** | _e.g. Jan 2019 to Dec 2023_ |
-| **Format** | _e.g. CSV, JSON, Excel_ |
+| **Source Name** | UCI Machine Learning Repository |
+| **Direct Access Link** | https://archive.ics.uci.edu/dataset/222/default+of+credit+card+clients |
+| **Row Count** | 30,000 |
+| **Column Count** | 32 (After feature engineering) |
+| **Time Period Covered** | April 2005 to September 2005 |
+| **Format** | CSV |
 
 **Key Columns Used**
 
 | Column Name | Description | Role in Analysis |
 |---|---|---|
-| _column_1_ | _What it means_ | _Used for KPI / filter / segmentation_ |
-| _column_2_ | _What it means_ | _Used for KPI / filter / segmentation_ |
-| _column_3_ | _What it means_ | _Used for KPI / filter / segmentation_ |
-| _column_4_ | _What it means_ | _Used for KPI / filter / segmentation_ |
+| `LIMIT_BAL` | Amount of given credit (NT dollar) | Primary measure of financial capacity & exposure |
+| `avg_delay` | Average payment delay across 6 months | Strongest behavioral risk predictor |
+| `utilization_ratio` | Credit utilized vs limit | Indicator of financial distress / reliance |
+| `default_status` | Default payment (1=yes, 0=no) | Primary target variable used for risk tracking |
 
 For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionary.md).
 
@@ -103,9 +103,9 @@ For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionar
 
 | KPI | Definition | Formula / Computation |
 |---|---|---|
-| _e.g. Monthly Revenue Growth %_ | _What business outcome this tracks_ | _Show the exact formula or notebook reference_ |
-| _e.g. Customer Churn Rate_ | _What business outcome this tracks_ | _Show the exact formula or notebook reference_ |
-| _e.g. Repeat Purchase Rate_ | _What business outcome this tracks_ | _Show the exact formula or notebook reference_ |
+| **Overall Default Rate (%)** | Percentage of the total portfolio that has defaulted | `Total Defaulters / Total Customers * 100` |
+| **Risk Tier Exposure** | Average credit limit assigned to customers within specific risk segments | `mean(LIMIT_BAL)` grouped by `risk_tier` |
+| **Behavioral Delay Index** | A blended average of a customer's payment latencies over 6 months | `mean(PAY_0` through `PAY_6)` |
 
 Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `notebooks/05_final_load_prep.ipynb`.
 
@@ -128,14 +128,11 @@ Store dashboard screenshots in [`tableau/screenshots/`](tableau/screenshots/) an
 
 _List 8-12 major findings from the analysis, written in decision language. Each insight should tell the reader what to think or act upon, not merely describe a chart._
 
-1. _Insight 1_
-2. _Insight 2_
-3. _Insight 3_
-4. _Insight 4_
-5. _Insight 5_
-6. _Insight 6_
-7. _Insight 7_
-8. _Insight 8_
+1. **Financial Buffer Focus**: Defaulters consistently possess lower credit limits (NT$ 130K) compared to non-defaulters (NT$ 178K), indicating lower financial capacity.
+2. **Behavioral Red Flags**: `avg_delay` is overwhelmingly the strongest predictor of default; every additional month of delay exponentially increases default odds.
+3. **Demographic Stability**: Marital status and Education level mathematically act as risk differentiators, with Graduate School level clients displaying the lowest baseline risk profile.
+4. **Noise Reduction via Engineered Features**: Payment delay months (`PAY_0` to `PAY_6`) exhibit very high multicollinearity (VIF > 10). Consolidating them into an `avg_delay` metric removes noise and sharpens model accuracy.
+5. **Non-Linear Consensus**: Both Logistic Regression (Log-Odds) and Random Forest (Gini Importance) models unanimously confirm behavioral payment metrics vastly outweigh demographic data in predicting failure.
 
 ---
 
@@ -145,9 +142,9 @@ _Provide 3-5 specific, actionable business recommendations, each linked directly
 
 | # | Insight | Recommendation | Expected Impact |
 |---|---|---|---|
-| 1 | _Which insight does this address?_ | _What should the stakeholder do?_ | _What measurable impact do you expect?_ |
-| 2 | _Which insight does this address?_ | _What should the stakeholder do?_ | _What measurable impact do you expect?_ |
-| 3 | _Which insight does this address?_ | _What should the stakeholder do?_ | _What measurable impact do you expect?_ |
+| 1 | `avg_delay` is the top predictor | **Behavioral Early-Warning System**: Flag any customer with `avg_delay > 1.5` months for early outreach before they miss a third payment. | Catches the majority of defaulters in the 'High Risk' tier 2-3 months early. |
+| 2 | Lower limits → higher default | **Dynamic Limit Adjustment**: Offer managed, proactive limit increases to good-standing 'Medium Risk' customers. | Reduces 'distress-driven' defaults by providing financial breathing room. |
+| 3 | Education & Marriage dependencies | **Demographic-Tailored Products**: Design graduated onboarding limits with stricter initial monitoring for 'Others/High School' tiers. | Reduces initial bank exposure in statistically higher-risk segments. |
 
 ---
 
