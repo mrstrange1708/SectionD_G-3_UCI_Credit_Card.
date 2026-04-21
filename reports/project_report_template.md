@@ -26,9 +26,10 @@ Use this outline to draft the final written report before exporting it as `proje
 
 ## 4. Problem Statement and Objectives
 
-- Formal problem definition
-- Scope
-- Success criteria
+- **Formal problem definition**: Financial institutions face increasing loan defaults, leading to revenue loss and higher risk exposure. This project aims to analyze customer demographics, transaction behavior, and credit patterns to identify key factors driving loan defaults, segment high-risk customers, and recommend strategies to reduce default rates and improve risk management.
+- **Scope**: Analysis of 30,000 credit card clients in Taiwan, focusing on demographic triggers and behavioral payment signals over a 6-month period.
+- **Success criteria**: Identification of top 3 tier-based risk segments and actionable limit adjustment strategies.
+
 
 ## 5. Data Description
 

@@ -1,4 +1,4 @@
-# NST DVA Capstone 2 - Project Repository
+# Credit Shield: Identifying and Mitigating Loan Default Risk
 
 > **Newton School of Technology | Data Visualization & Analytics**
 > A 2-week industry simulation capstone using Python, GitHub, and Tableau to convert raw data into actionable business intelligence.
@@ -37,13 +37,14 @@ If you are working in Google Colab:
 
 | Field | Details |
 |---|---|
-| **Project Title** | _To be filled by team_ |
-| **Sector** | _e.g. Retail, Finance, Healthcare, EdTech_ |
-| **Team ID** | _e.g. DVA-B1-T3_ |
+| **Project Title** | Credit Shield: Identifying and Mitigating Loan Default Risk |
+| **Sector** | Finance |
+| **Team ID** | _To be filled by team_ |
 | **Section** | _To be filled by team_ |
 | **Faculty Mentor** | _To be filled by team_ |
 | **Institute** | Newton School of Technology |
-| **Submission Date** | _To be filled by team_ |
+| **Submission Date** | 2026-04-21 |
+
 
 ### Team Members
 
@@ -61,15 +62,16 @@ If you are working in Google Colab:
 
 ## Business Problem
 
-_Describe the sector context, the decision-maker this project serves, and the core business challenge being addressed. Keep this to 3-5 sentences written in plain language, as if addressing a senior stakeholder._
+Financial institutions face increasing loan defaults, leading to revenue loss and higher risk exposure. This project aims to analyze customer demographics, transaction behavior, and credit patterns to identify key factors driving loan defaults, segment high-risk customers, and recommend strategies to reduce default rates and improve risk management.
 
 **Core Business Question**
 
-> _State the single main question your Tableau dashboard and Python analysis will answer._
+> What are the primary demographic and behavioral drivers of credit default, and how can we segment customers to proactively mitigate risk?
 
 **Decision Supported**
 
-> _What action or decision will this analysis enable the stakeholder to take?_
+> Enabling credit risk officers to adjust credit limits, intensify monitoring for high-risk segments, and refine lending criteria to reduce overall loss.
+
 
 ---
 
