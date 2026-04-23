@@ -131,8 +131,8 @@ _List 8-12 major findings from the analysis, written in decision language. Each 
 1. **Financial Buffer Focus**: Defaulters consistently possess lower credit limits (NT$ 130K) compared to non-defaulters (NT$ 178K), indicating lower financial capacity.
 2. **Behavioral Red Flags**: `avg_delay` is overwhelmingly the strongest predictor of default; every additional month of delay exponentially increases default odds.
 3. **Demographic Stability**: Marital status and Education level mathematically act as risk differentiators, with Graduate School level clients displaying the lowest baseline risk profile.
-4. **Noise Reduction via Engineered Features**: Payment delay months (`PAY_0` to `PAY_6`) exhibit very high multicollinearity (VIF > 10). Consolidating them into an `avg_delay` metric removes noise and sharpens model accuracy.
-5. **Non-Linear Consensus**: Both Logistic Regression (Log-Odds) and Random Forest (Gini Importance) models unanimously confirm behavioral payment metrics vastly outweigh demographic data in predicting failure.
+4. **Noise Reduction via Engineered Features**: Payment delay months (`PAY_0` to `PAY_6`) exhibit very high multicollinearity (VIF > 10). Consolidating them into an `avg_delay` metric removes noise and sharpens dashboard analysis.
+5. **Behavioral Significance**: Statistical correlation confirms that behavioral payment metrics vastly outweigh demographic data in signaling failure risk.
 
 ---
 
@@ -179,7 +179,8 @@ SectionName_TeamID_ProjectName/
 |   `-- presentation_outline.md
 |
 |-- docs/
-|   `-- data_dictionary.md
+|   |-- data_dictionary.md
+|   `-- notebook_pipeline_analysis.md
 |
 |-- DVA-oriented-Resume/
 `-- DVA-focused-Portfolio/
