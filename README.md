@@ -115,7 +115,7 @@ Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `not
 
 | Item | Details |
 |---|---|
-| **Dashboard URL** | _Paste Tableau Public link here_ |
+| **Dashboard URL** | https://public.tableau.com/app/profile/mansi.agarwal6786/viz/creditCard_17770722137780/Dashboard5 |
 | **Executive View** | _Describe the high-level KPI summary view_ |
 | **Operational View** | _Describe the detailed drill-down view_ |
 | **Main Filters** | _List the interactive filters used_ |
