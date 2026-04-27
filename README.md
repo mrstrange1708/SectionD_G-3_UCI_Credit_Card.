@@ -5,15 +5,6 @@
 
 ---
 
-## Before You Start
-
-1. Rename the repository using the format `SectionName_TeamID_ProjectName`.
-2. Fill in the project details and team table below.
-3. Add the raw dataset to `data/raw/`.
-4. Complete the notebooks in order from `01` to `05`.
-5. Publish the final dashboard and add the public link in `tableau/dashboard_links.md`.
-6. Export the final report and presentation as PDFs into `reports/`.
-
 ### Quick Start
 
 If you are working locally:
@@ -39,24 +30,24 @@ If you are working in Google Colab:
 |---|---|
 | **Project Title** | Credit Shield: Identifying and Mitigating Loan Default Risk |
 | **Sector** | Finance |
-| **Team ID** | _To be filled by team_ |
-| **Section** | _To be filled by team_ |
-| **Faculty Mentor** | _To be filled by team_ |
+| **Team ID** | G3 |
+| **Section** | D |
+| **Faculty Mentor** | Archit Raj & Satyaki Das |
 | **Institute** | Newton School of Technology |
-| **Submission Date** | 2026-04-21 |
+| **Submission Date** | 2026-04-29 |
 
 
 ### Team Members
 
 | Role | Name | GitHub Username |
 |---|---|---|
-| Project Lead | _Name_ | `github-handle` |
-| Data Lead | _Name_ | `github-handle` |
-| ETL Lead | _Name_ | `github-handle` |
-| Analysis Lead | _Name_ | `github-handle` |
-| Visualization Lead | _Name_ | `github-handle` |
-| Strategy Lead | _Name_ | `github-handle` |
-| PPT and Quality Lead | _Name_ | `github-handle` |
+| Project Lead | Shaik Junaid Sami | `mrstrange1708` |
+| Data Lead |  Shaik Junaid Sami  | `mrstrange1708` |
+| ETL Lead |  Shaik Junaid Sami  | `mrstrange1708` |
+| Analysis Lead | Kartik Mehra | `KartikMehra22` |
+| Visualization Lead | Mansi Agarwal | `Aggarwalmansi` |
+| Strategy Lead | Yogesh Modi | `YogeshModi24` |
+| PPT and Quality Lead | Keshav Goyal | `keshavgoel2101` |
 
 ---
 
@@ -80,7 +71,7 @@ Financial institutions face increasing loan defaults, leading to revenue loss an
 | Attribute | Details |
 |---|---|
 | **Source Name** | UCI Machine Learning Repository |
-| **Direct Access Link** | https://archive.ics.uci.edu/dataset/222/default+of+credit+card+clients |
+| **Direct Access Link** | https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset?select=UCI_Credit_Card.csv |
 | **Row Count** | 30,000 |
 | **Column Count** | 32 (After feature engineering) |
 | **Time Period Covered** | April 2005 to September 2005 |
