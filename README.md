@@ -1,296 +1,331 @@
 # Credit Shield: Identifying and Mitigating Loan Default Risk
-
-> **Newton School of Technology | Data Visualization & Analytics**
-> A 2-week industry simulation capstone using Python, GitHub, and Tableau to convert raw data into actionable business intelligence.
-
+ 
+> **Newton School of Technology | Data Visualization & Analytics Capstone 2**  
+> An industry-standard data analytics project using Python, Tableau, and GitHub to convert raw financial data into actionable risk intelligence.
+ 
 ---
-
-### Quick Start
-
-If you are working locally:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-jupyter notebook
-```
-
-If you are working in Google Colab:
-
-- Upload or sync the notebooks from `notebooks/`
-- Keep the final `.ipynb` files committed to GitHub
-- Export any cleaned datasets into `data/processed/`
-
----
-
+ 
 ## Project Overview
-
+ 
 | Field | Details |
 |---|---|
 | **Project Title** | Credit Shield: Identifying and Mitigating Loan Default Risk |
 | **Sector** | Finance |
-| **Team ID** | G3 |
-| **Section** | D |
-| **Faculty Mentor** | Archit Raj & Satyaki Das |
+| **Team** | Section D, Group 3 |
+| **Faculty Mentors** | Archit Raj & Satyaki Das |
 | **Institute** | Newton School of Technology |
-| **Submission Date** | 2026-04-29 |
-
-
-### Team Members
-
+| **Submission Date** | April 29, 2026 |
+ 
+---
+ 
+## Team Members
+ 
 | Role | Name | GitHub Username |
 |---|---|---|
-| Project Lead | Shaik Junaid Sami | `mrstrange1708` |
-| Data Lead |  Shaik Junaid Sami  | `mrstrange1708` |
-| ETL Lead |  Shaik Junaid Sami  | `mrstrange1708` |
-| Analysis Lead | Kartik Mehra | `KartikMehra22` |
-| Visualization Lead | Mansi Agarwal | `Aggarwalmansi` |
-| Strategy Lead | Yogesh Modi | `YogeshModi24` |
-| PPT and Quality Lead | Keshav Goyal | `keshavgoel2101` |
-
+| Project Lead | Shaik Junaid Sami | [`mrstrange1708`](https://github.com/mrstrange1708) |
+| Data Lead | Shaik Junaid Sami | [`mrstrange1708`](https://github.com/mrstrange1708) |
+| ETL Lead | Shaik Junaid Sami | [`mrstrange1708`](https://github.com/mrstrange1708) |
+| Analysis Lead | Kartik Mehra | [`KartikMehra22`](https://github.com/KartikMehra22) |
+| Visualization Lead | Mansi Agarwal | [`Aggarwalmansi`](https://github.com/Aggarwalmansi) |
+| Strategy Lead | Yogesh Modi | [`YogeshModi24`](https://github.com/YogeshModi24) |
+| PPT & Quality Lead | Keshav Goyal | [`keshavgoel2101`](https://github.com/keshavgoel2101) |
+ 
 ---
-
+ 
 ## Business Problem
-
-Financial institutions face increasing loan defaults, leading to revenue loss and higher risk exposure. This project aims to analyze customer demographics, transaction behavior, and credit patterns to identify key factors driving loan defaults, segment high-risk customers, and recommend strategies to reduce default rates and improve risk management.
-
-**Core Business Question**
-
+ 
+Financial institutions face increasing loan defaults, leading to revenue loss and higher risk exposure. This project analyzes customer demographics, transaction behavior, and credit patterns to identify key factors driving loan defaults, segment high-risk customers, and recommend strategies to reduce default rates and improve risk management.
+ 
+**Core Business Question:**
+ 
 > What are the primary demographic and behavioral drivers of credit default, and how can we segment customers to proactively mitigate risk?
-
-**Decision Supported**
-
-> Enabling credit risk officers to adjust credit limits, intensify monitoring for high-risk segments, and refine lending criteria to reduce overall loss.
-
-
+ 
+**Decision Supported:**
+ 
+> Enable credit risk officers to adjust credit limits, intensify monitoring for high-risk segments, and refine lending criteria to reduce overall portfolio loss.
+ 
 ---
-
+ 
 ## Dataset
-
+ 
 | Attribute | Details |
 |---|---|
-| **Source Name** | UCI Machine Learning Repository |
-| **Direct Access Link** | https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset?select=UCI_Credit_Card.csv |
-| **Row Count** | 30,000 |
-| **Column Count** | 32 (After feature engineering) |
-| **Time Period Covered** | April 2005 to September 2005 |
+| **Source** | UCI Machine Learning Repository |
+| **Kaggle Link** | [Default of Credit Card Clients Dataset](https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset) |
+| **Rows** | 30,000 |
+| **Columns** | 25 (original) → 32 (after cleaning and feature engineering) |
+| **Time Period** | April 2005 – September 2005 (Taiwan) |
 | **Format** | CSV |
-
-**Key Columns Used**
-
-| Column Name | Description | Role in Analysis |
+ 
+**Key Variables:**
+ 
+| Variable | Description | Role |
 |---|---|---|
-| `LIMIT_BAL` | Amount of given credit (NT dollar) | Primary measure of financial capacity & exposure |
-| `avg_delay` | Average payment delay across 6 months | Strongest behavioral risk predictor |
-| `utilization_ratio` | Credit utilized vs limit | Indicator of financial distress / reliance |
-| `default_status` | Default payment (1=yes, 0=no) | Primary target variable used for risk tracking |
-
-For full column definitions, see [`docs/data_dictionary.md`](docs/data_dictionary.md).
-
+| `LIMIT_BAL` | Credit limit (NT$) | Primary financial capacity measure |
+| `avg_delay` | Average payment delay (6 months) | Strongest behavioral predictor |
+| `utilization_ratio` | Bill amount / Credit limit | Financial stress indicator |
+| `default_status` | Default next month (1=yes, 0=no) | Target variable |
+ 
+Full column definitions: [`docs/data_dictionary.md`](docs/data_dictionary.md)
+ 
 ---
-
-## KPI Framework
-
-| KPI | Definition | Formula / Computation |
+ 
+## Key Findings
+ 
+### 1. Payment Delay is the Primary Default Predictor
+`avg_delay` shows the strongest positive correlation with default across all features tested. Defaulters' average repayment delay increased from **0.26 months in April to 0.72 months in September** — a **177% deterioration** over the 6-month observation window.
+ 
+### 2. Financial Capacity Separates Risk Segments
+Mann-Whitney U test confirmed (p = 6.13e-190) that defaulters hold significantly lower credit limits:
+- **Defaulters:** NT$ 130,110
+- **Non-defaulters:** NT$ 178,100
+- **Difference:** NT$ 47,990 (27% lower)
+### 3. Demographics Carry Statistically Proven Risk Differentials
+Chi-Square tests confirmed both Education Level (p = 1.55e-23) and Marital Status (p = 1.51e-07) are statistically dependent on default outcome. High School graduates and customers in the "Others" marital category show elevated default rates.
+ 
+### 4. High Risk Segment Drives Disproportionate Defaults
+**2,868 customers (9.56%)** classified as High Risk under rule-based segmentation show a default rate of approximately **42%** — nearly **double the portfolio average of 22.12%**.
+ 
+### 5. Critical Risk Zone Identified
+Customers with `utilization_ratio > 0.8` AND `max_delay ≥ 2` show catastrophic default rates. The Financial Stress scatter plot confirms a critical risk zone where both financial strain and behavioral deterioration converge.
+ 
+---
+ 
+## Business Recommendations
+ 
+| # | Recommendation | Expected Impact |
 |---|---|---|
-| **Overall Default Rate (%)** | Percentage of the total portfolio that has defaulted | `Total Defaulters / Total Customers * 100` |
-| **Risk Tier Exposure** | Average credit limit assigned to customers within specific risk segments | `mean(LIMIT_BAL)` grouped by `risk_tier` |
-| **Behavioral Delay Index** | A blended average of a customer's payment latencies over 6 months | `mean(PAY_0` through `PAY_6)` |
-
-Document KPI logic clearly in `notebooks/04_statistical_analysis.ipynb` and `notebooks/05_final_load_prep.ipynb`.
-
+| 1 | **Early Warning System:** Flag customers when `avg_delay` crosses 1.0 for immediate outreach | Catch majority of High Risk defaults 2-3 months early |
+| 2 | **Dynamic Credit Limit Review:** Customers with `LIMIT_BAL < NT$ 100,000` AND `utilization_ratio > 0.8` should be reviewed for limit adjustment or payment plan restructuring | Reduce distress-driven defaults by providing financial breathing room |
+| 3 | **Demographic-Targeted Financial Education:** Targeted financial literacy programs for High School graduate segment | Reduce default exposure at acquisition stage for highest-risk education tier |
+ 
 ---
-
-## Tableau Dashboard
-
-| Item | Details |
-|---|---|
-| **Dashboard URL** | https://public.tableau.com/app/profile/mansi.agarwal6786/viz/creditCard_17770722137780/Dashboard5 |
-| **Executive View** | _Describe the high-level KPI summary view_ |
-| **Operational View** | _Describe the detailed drill-down view_ |
-| **Main Filters** | _List the interactive filters used_ |
-
-Store dashboard screenshots in [`tableau/screenshots/`](tableau/screenshots/) and document the public links in [`tableau/dashboard_links.md`](tableau/dashboard_links.md).
-
----
-
-## Key Insights
-
-_List 8-12 major findings from the analysis, written in decision language. Each insight should tell the reader what to think or act upon, not merely describe a chart._
-
-1. **Financial Buffer Focus**: Defaulters consistently possess lower credit limits (NT$ 130K) compared to non-defaulters (NT$ 178K), indicating lower financial capacity.
-2. **Behavioral Red Flags**: `avg_delay` is overwhelmingly the strongest predictor of default; every additional month of delay exponentially increases default odds.
-3. **Demographic Stability**: Marital status and Education level mathematically act as risk differentiators, with Graduate School level clients displaying the lowest baseline risk profile.
-4. **Noise Reduction via Engineered Features**: Payment delay months (`PAY_0` to `PAY_6`) exhibit very high multicollinearity (VIF > 10). Consolidating them into an `avg_delay` metric removes noise and sharpens dashboard analysis.
-5. **Behavioral Significance**: Statistical correlation confirms that behavioral payment metrics vastly outweigh demographic data in signaling failure risk.
-
----
-
-## Recommendations
-
-_Provide 3-5 specific, actionable business recommendations, each linked directly to an insight above._
-
-| # | Insight | Recommendation | Expected Impact |
-|---|---|---|---|
-| 1 | `avg_delay` is the top predictor | **Behavioral Early-Warning System**: Flag any customer with `avg_delay > 1.5` months for early outreach before they miss a third payment. | Catches the majority of defaulters in the 'High Risk' tier 2-3 months early. |
-| 2 | Lower limits → higher default | **Dynamic Limit Adjustment**: Offer managed, proactive limit increases to good-standing 'Medium Risk' customers. | Reduces 'distress-driven' defaults by providing financial breathing room. |
-| 3 | Education & Marriage dependencies | **Demographic-Tailored Products**: Design graduated onboarding limits with stricter initial monitoring for 'Others/High School' tiers. | Reduces initial bank exposure in statistically higher-risk segments. |
-
----
-
+ 
 ## Repository Structure
-
-```text
-SectionName_TeamID_ProjectName/
-|
-|-- README.md
-|
-|-- data/
-|   |-- raw/                         # Original dataset (never edited)
-|   `-- processed/                   # Cleaned output from ETL pipeline
-|
-|-- notebooks/
-|   |-- 01_extraction.ipynb
-|   |-- 02_cleaning.ipynb
-|   |-- 03_eda.ipynb
-|   |-- 04_statistical_analysis.ipynb
-|   `-- 05_final_load_prep.ipynb
-|
-|-- scripts/
-|   `-- etl_pipeline.py
-|
-|-- tableau/
-|   |-- screenshots/
-|   `-- dashboard_links.md
-|
-|-- reports/
-|   |-- README.md
-|   |-- project_report_template.md
-|   `-- presentation_outline.md
-|
-|-- docs/
-|   |-- data_dictionary.md
-|   `-- notebook_pipeline_analysis.md
-|
-|-- DVA-oriented-Resume/
-`-- DVA-focused-Portfolio/
+ 
 ```
-
+SectionD_G-3_UCI_Credit_Card/
+│
+├── README.md                           # This file
+│
+├── data/
+│   ├── raw/
+│   │   └── UCI_Credit_Card_raw.csv     # Original dataset (never edited)
+│   └── processed/
+│       ├── cleaned_credit_data.csv     # Output from notebook 02 (30,000 rows)
+│       └── tableau_ready_dataset.csv   # Output from notebook 05 (30,000 rows)
+│
+├── notebooks/
+│   ├── 01_extraction.ipynb             # Data loading and baseline profiling
+│   ├── 02_cleaning.ipynb               # ETL pipeline with feature engineering
+│   ├── 03_eda.ipynb                    # Exploratory data analysis
+│   ├── 04_statistical_analysis.ipynb   # Hypothesis testing and formal proofs
+│   └── 05_final_load_prep.ipynb        # Dashboard-ready export
+│
+├── scripts/
+│   └── etl_pipeline.py                 # Modular ETL script (optional)
+│
+├── tableau/
+│   ├── screenshots/                    # Dashboard PNG exports
+│   │   ├── Behavioral___Segment_Analysis.png
+│   │   ├── Credit_Risk_Overview.png
+│   │   ├── Customer_Risk_by_Demographics.png
+│   │   ├── Financial_Behavior___Stress_Analysis.png
+│   │   └── Repayment_Behavior_Analysis.png
+│   └── dashboard_links.md              # Tableau Public URLs
+│
+├── reports/
+│   ├── notebook_pipeline_analysis.md   # Complete pipeline documentation
+│   └── Shaik_Mohammed_Junaid_Sami_DVA_Resume.pdf
+│
+├── docs/
+│   └── data_dictionary.md              # Column definitions and transformations
+│
+└── requirements.txt                    # Python dependencies
+```
+ 
 ---
-
-## Analytical Pipeline
-
-The project follows a structured 7-step workflow:
-
-1. **Define** - Sector selected, problem statement scoped, mentor approval obtained.
-2. **Extract** - Raw dataset sourced and committed to `data/raw/`; data dictionary drafted.
-3. **Clean and Transform** - Cleaning pipeline built in `notebooks/02_cleaning.ipynb` and optionally `scripts/etl_pipeline.py`.
-4. **Analyze** - EDA and statistical analysis performed in notebooks `03` and `04`.
-5. **Visualize** - Interactive Tableau dashboard built and published on Tableau Public.
-6. **Recommend** - 3-5 data-backed business recommendations delivered.
-7. **Report** - Final project report and presentation deck completed and exported to PDF in `reports/`.
-
----
-
+ 
 ## Tech Stack
-
-| Tool | Status | Purpose |
+ 
+| Tool | Version | Purpose |
 |---|---|---|
-| Python + Jupyter Notebooks | Mandatory | ETL, cleaning, analysis, and KPI computation |
-| Google Colab | Supported | Cloud notebook execution environment |
-| Tableau Public | Mandatory | Dashboard design, publishing, and sharing |
-| GitHub | Mandatory | Version control, collaboration, contribution audit |
-| SQL | Optional | Initial data extraction only, if documented |
-
-**Recommended Python libraries:** `pandas`, `numpy`, `matplotlib`, `seaborn`, `scipy`, `statsmodels`
-
+| Python | 3.12 | ETL, cleaning, analysis, KPI computation |
+| Jupyter Notebooks | Latest | Interactive analysis environment |
+| Pandas | Latest | Data manipulation and transformation |
+| NumPy | Latest | Numerical operations |
+| SciPy | Latest | Statistical testing |
+| Seaborn / Matplotlib | Latest | Visualization |
+| Statsmodels | Latest | VIF and advanced statistics |
+| Tableau Public | Latest | Interactive dashboard design and publishing |
+| GitHub | Latest | Version control and collaboration |
+ 
 ---
-
-## Evaluation Rubric
-
-| Area | Marks | Focus |
+ 
+## Getting Started
+ 
+### 1. Clone the Repository
+ 
+```bash
+git clone https://github.com/mrstrange1708/SectionD_G-3_UCI_Credit_Card.git
+cd SectionD_G-3_UCI_Credit_Card
+```
+ 
+### 2. Set Up Python Environment
+ 
+**Option A: Using venv**
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+ 
+**Option B: Using Conda**
+```bash
+conda create -n dva-capstone python=3.12
+conda activate dva-capstone
+pip install -r requirements.txt
+```
+ 
+### 3. Run the Notebooks
+ 
+```bash
+jupyter notebook
+```
+ 
+Open notebooks in order: `01_extraction.ipynb` → `02_cleaning.ipynb` → `03_eda.ipynb` → `04_statistical_analysis.ipynb` → `05_final_load_prep.ipynb`
+ 
+### 4. (Optional) Run the ETL Pipeline Script
+ 
+To regenerate the cleaned dataset from scratch:
+ 
+```bash
+python scripts/etl_pipeline.py \
+  --input data/raw/UCI_Credit_Card_raw.csv \
+  --output data/processed/cleaned_credit_data.csv
+```
+ 
+---
+ 
+## Tableau Dashboard
+ 
+**Live Dashboard:** [Credit Shield - Risk Intelligence Dashboard](https://public.tableau.com/app/profile/mansi.agarwal6786/viz/creditCard_17770722137780/Dashboard5?publish=yes)
+ 
+### Dashboard Views:
+ 
+1. **Credit Risk Overview** — Portfolio-level KPIs and default distribution
+2. **Customer Risk by Demographics** — Default rates segmented by education, marriage, gender, and age
+3. **Behavioral & Segment Analysis** — Risk tier distribution and delay behavior patterns
+4. **Financial Behavior & Stress Analysis** — Utilization vs payment gap scatter and bill/payment comparison
+5. **Repayment Behavior Analysis** — Payment trend over 6 months and delay score distribution
+**All dashboards consistently show 30,000 total customers** — verified for data integrity.
+ 
+---
+ 
+## Analytical Pipeline
+ 
+The project follows a structured 5-notebook workflow:
+ 
+### Notebook 01: Extraction
+- Load raw CSV (`UCI_Credit_Card_raw.csv`)
+- Baseline data profiling
+- Identify implicit missing values (EDUCATION: 0,5,6 | MARRIAGE: 0)
+- Document class imbalance (77.88% non-default vs 22.12% default)
+### Notebook 02: Cleaning & Feature Engineering
+**Transformations:**
+- Drop `ID` column
+- Rename `default.payment.next.month` → `default_status`
+- Impute EDUCATION and MARRIAGE missing values with mode
+- Recode PAY columns: `-2` → `-1` (preserve behavioral signal)
+- **Outlier audit:** Extreme values identified but **retained** (valid financial profiles)
+- Engineer 4 features: `utilization_ratio`, `avg_delay`, `max_delay`, `risk_tier`
+- Create 4 label columns for Tableau: `sex_label`, `education_label`, `marriage_label`, `default_label`
+**Output:** `cleaned_credit_data.csv` — **30,000 rows × 32 columns**
+ 
+### Notebook 03: Exploratory Data Analysis
+- Univariate distributions (LIMIT_BAL, AGE, default_status)
+- Bivariate analysis: demographics vs default, payment behavior vs default
+- Correlation heatmap
+- Visual validation of engineered features
+### Notebook 04: Statistical Analysis
+**Tests performed (α = 0.05):**
+1. **Shapiro-Wilk:** Normality testing → both LIMIT_BAL and AGE non-normal → use non-parametric tests
+2. **Mann-Whitney U:** Credit limit vs default → p = 6.13e-190 → H₀ rejected → defaulters have significantly lower limits
+3. **Chi-Square:** Education and Marriage vs default → both p < 0.05 → statistically dependent
+4. **VIF:** PAY columns multicollinearity check → all VIF < 5 → acceptable individually, but temporal redundancy justifies `avg_delay` consolidation
+**Output:** Formal statistical proof of all EDA observations
+ 
+### Notebook 05: Final Load Prep
+- Add binned groupings: `age_group`, `utilization_category`, `delay_category`
+- Export Tableau-ready dataset: `tableau_ready_dataset.csv` — **30,000 rows × 36 columns**
+---
+ 
+## Key Statistical Results
+ 
+| Test | Variable(s) | Result | Interpretation |
+|---|---|---|---|
+| **Shapiro-Wilk** | LIMIT_BAL, AGE | p < 0.05 | Non-normal → use non-parametric tests |
+| **Mann-Whitney U** | LIMIT_BAL vs default | p = 6.13e-190, r = 0.2356 | Defaulters have significantly lower credit limits |
+| **Chi-Square** | EDUCATION vs default | χ² = 109.30, p = 1.55e-23 | Education level statistically dependent on default |
+| **Chi-Square** | MARRIAGE vs default | χ² = 31.41, p = 1.51e-07 | Marital status statistically dependent on default |
+| **VIF** | PAY_0 to PAY_6 | All VIF < 5 | Acceptable individually, avg_delay engineered for temporal redundancy reduction |
+ 
+Full analysis: [`notebooks/04_statistical_analysis.ipynb`](notebooks/04_statistical_analysis.ipynb)
+ 
+---
+ 
+## Data Quality & Integrity
+ 
+### Cleaning Decisions Documented:
+ 
+| Issue | Decision | Rationale |
 |---|---|---|
-| Problem Framing | 10 | Is the business question clear and well-scoped? |
-| Data Quality and ETL | 15 | Is the cleaning pipeline thorough and documented? |
-| Analysis Depth | 25 | Are statistical methods applied correctly with insight? |
-| Dashboard and Visualization | 20 | Is the Tableau dashboard interactive and decision-relevant? |
-| Business Recommendations | 20 | Are insights actionable and well-reasoned? |
-| Storytelling and Clarity | 10 | Is the presentation professional and coherent? |
-| **Total** | **100** | |
-
-> Marks are awarded for analytical thinking and decision relevance, not chart quantity, visual decoration, or code length.
-
+| **EDUCATION values 0,5,6** | Treated as NaN → mode imputation | Undocumented in UCI dictionary → implicit missing values |
+| **MARRIAGE value 0** | Treated as NaN → mode imputation | Undocumented in UCI dictionary → implicit missing values |
+| **PAY column value -2** | Recoded to -1 | Preserve behavioral signal of zero-balance months |
+| **Outliers in LIMIT_BAL, BILL_AMT1, PAY_AMT1** | **Retained all rows** | Extreme values represent valid high-credit-limit and high-bill customers — removing would introduce selection bias |
+| **Negative BILL_AMT values** | Retained | Represent credit balances (customer overpaid) — valid financial state |
+ 
+**Final dataset integrity:**
+- **30,000 rows retained** (zero rows dropped)
+- **Zero missing values** in final cleaned dataset
+- **Consistent across all notebooks and Tableau dashboards**
+Full documentation: [`docs/data_dictionary.md`](docs/data_dictionary.md) | [`reports/notebook_pipeline_analysis.md`](reports/notebook_pipeline_analysis.md)
+ 
 ---
+ 
+## Project Deliverables
+ 
+- ✅ **5 Jupyter Notebooks** — Complete ETL and analysis pipeline
+- ✅ **Tableau Dashboard** — 5 interactive views published on Tableau Public
+- ✅ **Statistical Analysis** — Formal hypothesis testing with p-values
+- ✅ **Data Dictionary** — All variables documented
+- ✅ **Pipeline Documentation** — Complete notebook-by-notebook analysis
+- ✅ **Business Recommendations** — 3 actionable strategies
+- ✅ **Project Report** — Completed ([Final_Report.pdf](reports/Final_Report.pdf))
+- ✅ **Presentation Deck** — Completed ([Presentation_Slides.pptx](reports/Presentation_Slides.pptx))
 
-## Submission Checklist
-
-**GitHub Repository**
-
-- [ ] Public repository created with the correct naming convention (`SectionName_TeamID_ProjectName`)
-- [ ] All notebooks committed in `.ipynb` format
-- [ ] `data/raw/` contains the original, unedited dataset
-- [ ] `data/processed/` contains the cleaned pipeline output
-- [ ] `tableau/screenshots/` contains dashboard screenshots
-- [ ] `tableau/dashboard_links.md` contains the Tableau Public URL
-- [ ] `docs/data_dictionary.md` is complete
-- [ ] `README.md` explains the project, dataset, and team
-- [ ] All members have visible commits and pull requests
-
-**Tableau Dashboard**
-
-- [ ] Published on Tableau Public and accessible via public URL
-- [ ] At least one interactive filter included
-- [ ] Dashboard directly addresses the business problem
-
-**Project Report**
-
-- [ ] Final report exported as PDF into `reports/`
-- [ ] Cover page, executive summary, sector context, problem statement
-- [ ] Data description, cleaning methodology, KPI framework
-- [ ] EDA with written insights, statistical analysis results
-- [ ] Dashboard screenshots and explanation
-- [ ] 8-12 key insights in decision language
-- [ ] 3-5 actionable recommendations with impact estimates
-- [ ] Contribution matrix matches GitHub history
-
-**Presentation Deck**
-
-- [ ] Final presentation exported as PDF into `reports/`
-- [ ] Title slide through recommendations, impact, limitations, and next steps
-
-**Individual Assets**
-
-- [ ] DVA-oriented resume updated to include this capstone
-- [ ] Portfolio link or project case study added
-
----
-
-## Contribution Matrix
-
-This table must match evidence in GitHub Insights, PR history, and committed files.
-
-| Team Member | Dataset and Sourcing | ETL and Cleaning | EDA and Analysis | Statistical Analysis | Tableau Dashboard | Report Writing | PPT and Viva |
-|---|---|---|---|---|---|---|---|
-| _Member 1_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 2_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 3_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 4_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 5_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-| _Member 6_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ | _Owner / support_ |
-
-_Declaration: We confirm that the above contribution details are accurate and verifiable through GitHub Insights, PR history, and submitted artifacts._
-
-**Team Lead Name:** _____________________________
-
-**Date:** _______________
-
----
-
+ 
 ## Academic Integrity
-
-All analysis, code, and recommendations in this repository must be the original work of the team listed above. Free-riding is tracked via GitHub Insights and pull request history. Any mismatch between the contribution matrix and actual commit history may result in individual grade adjustments.
-
+ 
+All analysis, code, and recommendations in this repository are the original work of the team listed above. Contribution tracking is verified through GitHub Insights, commit history, and pull request logs.
+ 
+**Team Lead:** Shaik Junaid Sami  
+**Date:** April 28, 2026
+ 
 ---
-
-*Newton School of Technology - Data Visualization & Analytics | Capstone 2*
+ 
+## License
+ 
+This project is submitted as part of the Newton School of Technology Data Visualization & Analytics Capstone 2 curriculum. All rights reserved.
+ 
+---
+ 
+## Contact
+ 
+For questions or collaboration:
+- **Project Lead:** Shaik Junaid Sami — [GitHub](https://github.com/mrstrange1708)
+- **Visualization Lead:** Mansi Agarwal — [GitHub](https://github.com/Aggarwalmansi)
+---
+ 
+*Newton School of Technology — Data Visualization & Analytics | Capstone 2 | Section D, Group 3*
