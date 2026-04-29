@@ -303,7 +303,7 @@ Full documentation: [`docs/data_dictionary.md`](docs/data_dictionary.md) | [`rep
 - ✅ **Pipeline Documentation** — Complete notebook-by-notebook analysis
 - ✅ **Business Recommendations** — 3 actionable strategies
 - ✅ **Project Report** — Completed ([Final_Report.pdf](reports/Final_Report.pdf))
-- ✅ **Presentation Deck** — Completed ([Presentation_Slides.pptx](reports/Presentation_Slides.pptx))
+- ✅ **Presentation Deck** — Completed ([Presentation_Slides.pptx](reports/Presentation_Slides.pdf))
 
  
 ## Academic Integrity
