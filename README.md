@@ -302,8 +302,8 @@ Full documentation: [`docs/data_dictionary.md`](docs/data_dictionary.md) | [`rep
 - ✅ **Data Dictionary** — All variables documented
 - ✅ **Pipeline Documentation** — Complete notebook-by-notebook analysis
 - ✅ **Business Recommendations** — 3 actionable strategies
-- ✅ **Project Report** — Completed ([Final_Report.pdf](reports/Final_Report.pdf))
-- ✅ **Presentation Deck** — Completed ([Presentation_Slides.pptx](reports/Presentation_Slides.pdf))
+- ✅ **Project Report** — Completed ([Final_Report.pdf](reports/Final_Report.docx))
+- ✅ **Presentation Deck** — Completed ([Presentation_Slides.pdf](reports/Presentation_Slides.pdf))
 
  
 ## Academic Integrity
@@ -311,7 +311,7 @@ Full documentation: [`docs/data_dictionary.md`](docs/data_dictionary.md) | [`rep
 All analysis, code, and recommendations in this repository are the original work of the team listed above. Contribution tracking is verified through GitHub Insights, commit history, and pull request logs.
  
 **Team Lead:** Shaik Junaid Sami  
-**Date:** April 28, 2026
+**Date:** April 29, 2026
  
 ---
  
